@@ -28,7 +28,7 @@ class OpenPage:
             browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
         return self
 
-    def assertimg_auth_page(self):
+    def asserting_auth_page(self):
         with allure.step("Проверка перехода на страницу авторизации после нажатии кнопки Вход"):
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.Login__title').should(have.text('Вход'))

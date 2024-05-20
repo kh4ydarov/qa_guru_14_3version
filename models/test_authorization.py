@@ -23,20 +23,22 @@ class Authorization:
             browser.element('#code').should(have.text('Код подтверждения'))
         return self
 
-
     def sign_in(self):
         with allure.step("Авторизация с валидными данными"):
             browser.element('#email').set_value(user.sign_in_login)
             browser.element('#password').set_value(user.sign_in_password)
             browser.element('.Login__button').click()
+            browser.element('.ClosePromo').should(be.visible).should(be.clickable).click()
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+
         return self
 
-    def asserting_sign_in(self):
+    def assert_sign_in(self):
         with allure.step("Успешная авторизация"):
-            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
-            browser.element('.UserMenu').click()
-            browser.element('.UserMenu__sidebar').should(be.visible)
-            #UserMenu__list
+            if not browser.element('.Alert__text').should(be.visible):
+                browser.element('.UserMenu').should(be.visible).should(be.clickable).click()
+                browser.element('.UserMenu__avatar').should(be.visible)
+
         return self
 
 
