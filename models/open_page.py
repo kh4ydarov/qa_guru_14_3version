@@ -10,8 +10,6 @@ class OpenPage:
     def open_site(self):
         with allure.step("Открыть сайт allplay.uz"):
             browser.open("")
-            # time.sleep(5)
-            # browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.ClosePromo').should(be.visible).should(be.clickable).click()
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
