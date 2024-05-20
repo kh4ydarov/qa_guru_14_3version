@@ -1,6 +1,6 @@
 import allure
 
-from selene import browser, be
+from selene import browser, be, have
 
 
 class OpenPage:
@@ -16,14 +16,19 @@ class OpenPage:
             browser.element('a.Navbar__link[href="/tv"]').click()
         return self
 
-    def movie_page(self):
-        with allure.step("Переход в раздел Кинотеатр"):
-            browser.element('a.Navbar__link[href="/movies"]').click()
+    def asserting_tv_page(self):
+        with allure.step("Проверка страницы после нажатие кнопки в раздел ТВ"):
+            browser.element('.PageSection__title-left').should(have.text('Список каналов'))
         return self
 
     def authorization_page(self):
         with allure.step("Переход в страницу авторизации"):
             browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
+        return self
+
+    def assertimg_auth_page(self):
+        with allure.step("Проверка перехода на страницу авторизации после нажатии кнопки Вход"):
+            browser.element('.Login__title').should(have.text('Вход'))
         return self
 
 

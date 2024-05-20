@@ -11,8 +11,13 @@ class Search:
             browser.element('.search-bar').should(be.visible).should(be.clickable).click()
             browser.element('.input').set_value('Терминатор').press_enter()
             browser.element('.marquee-text__scroll').perform(command.js.scroll_into_view).click()
+        return self
+
+    def asserting_result(self):
+        with allure.step("Проверка на результать поиска фильма"):
             browser.element('.marquee-text__scroll').should(have.text('Терминатор'))
         return self
+
 
 
 search = Search()
