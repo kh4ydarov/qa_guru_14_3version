@@ -15,9 +15,9 @@ class Search:
 
     def asserting_result(self):
         with allure.step("Проверка на результать поиска фильма"):
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.marquee-text__scroll').should(have.text('Терминатор'))
         return self
-
 
 
 search = Search()

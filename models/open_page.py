@@ -8,6 +8,7 @@ class OpenPage:
     def open_site(self):
         with allure.step("Открыть сайт allplay.uz"):
             browser.open("")
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.ClosePromo').should(be.visible).should(be.clickable).click()
         return self
 
@@ -18,6 +19,7 @@ class OpenPage:
 
     def asserting_tv_page(self):
         with allure.step("Проверка страницы после нажатие кнопки в раздел ТВ"):
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.PageSection__title-left').should(have.text('Список каналов'))
         return self
 
@@ -28,6 +30,7 @@ class OpenPage:
 
     def assertimg_auth_page(self):
         with allure.step("Проверка перехода на страницу авторизации после нажатии кнопки Вход"):
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.Login__title').should(have.text('Вход'))
         return self
 

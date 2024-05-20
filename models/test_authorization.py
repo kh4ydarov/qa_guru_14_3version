@@ -33,6 +33,7 @@ class Authorization:
 
     def asserting_sign_in(self):
         with allure.step("Успешная авторизация"):
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.UserMenu').should(be.present)
         return self
 
