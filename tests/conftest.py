@@ -19,6 +19,10 @@ def setup_browser(request):
     browser.config.base_url = 'https://allplay.uz'
 
     options = Options()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--enable-automation')
+    options.page_load_strategy = 'eager'
+
     selenoid_capabilities = {
         "browserName": "chrome",
         "browserVersion": "122.0",
