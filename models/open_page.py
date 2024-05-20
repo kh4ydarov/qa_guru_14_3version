@@ -7,13 +7,19 @@ from selene import browser, be, have
 
 class OpenPage:
 
+    def close_promo(self):
+        browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+        if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
+            browser.element('.ClosePromo').click()
+        return
+
     def open_site(self):
         with allure.step("Открыть сайт allplay.uz"):
             browser.open("")
             browser.element('.ClosePromo').should(be.visible).should(be.clickable).click()
-            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
-            if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
-                browser.element('.ClosePromo').click()
+            self.close_promo()
+            self.close_promo()
+
 
         return self
 
@@ -31,6 +37,8 @@ class OpenPage:
         with allure.step("Переход в страницу авторизации"):
             browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+            if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
+                browser.element('.ClosePromo').click()
 
         return self
 
