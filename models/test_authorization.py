@@ -28,7 +28,6 @@ class Authorization:
             browser.element('#email').set_value(user.sign_in_login)
             browser.element('#password').set_value(user.sign_in_password)
             browser.element('.Login__button').click()
-            browser.element('.ClosePromo').should(be.visible).should(be.clickable).click()
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
 
         return self
