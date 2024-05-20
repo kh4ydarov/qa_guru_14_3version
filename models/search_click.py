@@ -10,6 +10,7 @@ class Search:
             browser.element('a.Navbar__link[aria-label="Поиск"]').click()
             browser.element('.search-bar').should(be.visible).should(be.clickable).click()
             browser.element('.input').set_value('Терминатор').press_enter()
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.marquee-text__scroll').perform(command.js.scroll_into_view).click()
         return self
 
