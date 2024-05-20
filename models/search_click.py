@@ -11,13 +11,13 @@ class Search:
             browser.element('.search-bar').should(be.visible).should(be.clickable).click()
             browser.element('.input').set_value('Терминатор').press_enter()
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
-            browser.element('.marquee-text__scroll').perform(command.js.scroll_into_view).click()
+            browser.element('.SearchResults__title').perform(command.js.scroll_into_view)
         return self
 
     def asserting_result(self):
         with allure.step("Проверка на результать поиска фильма"):
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
-            browser.element('.marquee-text__scroll').should(have.text('Терминатор'))
+            browser.element('.SearchResults__title').should(have.text('Фильмы'))
         return self
 
 
