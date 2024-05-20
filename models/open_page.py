@@ -14,6 +14,9 @@ class OpenPage:
             # browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('.ClosePromo').should(be.visible).should(be.clickable).click()
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+            if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
+                browser.element('.ClosePromo').click()
+
         return self
 
     def tv_page(self):
