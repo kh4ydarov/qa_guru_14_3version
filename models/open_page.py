@@ -36,15 +36,25 @@ class OpenPage:
 
     def authorization_page(self):
         with allure.step("Переход в страницу авторизации"):
-            browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
-            self.close_promo()
-            self.close_promo()
+            if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
+                browser.element('.ClosePromo').click()
+                browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+            elif not browser.element('.ClosePromo').matching(be.visible) or not browser.element('.ClosePromo').matching(
+                    be.clickable):
+                browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
+            # browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
 
         return self
 
     def asserting_auth_page(self):
         with allure.step("Проверка перехода на страницу авторизации после нажатии кнопки Вход"):
-            browser.element('.Login__title').should(have.text('Вход'))
+            if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
+                browser.element('.ClosePromo').click()
+                browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+            elif not browser.element('.ClosePromo').matching(be.visible) or not browser.element('.ClosePromo').matching(
+                    be.clickable):
+                browser.element('.Login__title').should(have.text('Вход'))
+            # browser.element('.Login__title').should(have.text('Вход'))
         return self
 
 

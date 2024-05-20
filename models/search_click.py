@@ -7,7 +7,13 @@ class Search:
 
     def search_elements(self):
         with allure.step("Поиск определленого фильма и переход в карточку фильма"):
-            browser.element('a.Navbar__link[aria-label="Поиск"]').click()
+            if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
+                browser.element('.ClosePromo').click()
+                browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
+            elif not browser.element('.ClosePromo').matching(be.visible) or not browser.element('.ClosePromo').matching(
+                    be.clickable):
+                browser.element('a.Navbar__link[aria-label="Поиск"]').click()
+            # browser.element('a.Navbar__link[aria-label="Поиск"]').click()
             browser.element('.search-bar').should(be.visible).should(be.clickable).click()
             browser.element('.input').set_value('Терминатор').press_enter()
             browser.should(have.js_returned(True, 'return document.readyState === "complete"'))

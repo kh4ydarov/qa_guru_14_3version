@@ -9,7 +9,8 @@ class ChangeLanguage:
             if browser.element('.ClosePromo').matching(be.visible.and_(be.clickable)):
                 browser.element('.ClosePromo').click()
                 browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
-            elif not browser.element('.ClosePromo').matching(be.visible) or not browser.element('.ClosePromo').matching(be.clickable):
+            elif not browser.element('.ClosePromo').matching(be.visible) or not browser.element('.ClosePromo').matching(
+                    be.clickable):
                 browser.element('.langs [href="/uz/login/"]').click()
             # browser.element('.langs [href="/uz/login/"]').click()
         return self
