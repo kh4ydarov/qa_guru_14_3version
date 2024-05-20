@@ -25,6 +25,7 @@ class OpenPage:
 
     def authorization_page(self):
         with allure.step("Переход в страницу авторизации"):
+            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
             browser.element('a.d-none.d-lg-inline.Navbar__link[href="/login/"]').click()
         return self
 
