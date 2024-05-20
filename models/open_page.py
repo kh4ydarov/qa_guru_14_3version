@@ -26,6 +26,7 @@ class OpenPage:
     def tv_page(self):
         with allure.step("Переход в раздел ТВ"):
             browser.element('a.Navbar__link[href="/tv"]').click()
+            self.close_promo()
         return self
 
     def asserting_tv_page(self):
