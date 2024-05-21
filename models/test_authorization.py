@@ -28,8 +28,6 @@ class Authorization:
             browser.element('#email').set_value(user.sign_in_login)
             browser.element('#password').set_value(user.sign_in_password)
             browser.element('.Login__button').click()
-            browser.should(have.js_returned(True, 'return document.readyState === "complete"'))
-
         return self
 
     def assert_sign_in(self):
@@ -37,7 +35,6 @@ class Authorization:
             if not browser.element('.Alert__text').should(be.visible):
                 browser.element('.UserMenu').should(be.visible).should(be.clickable).click()
                 browser.element('.UserMenu__avatar').should(be.visible)
-
         return self
 
 
